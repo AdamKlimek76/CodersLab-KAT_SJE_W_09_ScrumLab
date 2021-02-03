@@ -11,7 +11,8 @@ public class Plan {
 
 
 
-    public Plan(String name, String description, Timestamp created, int adminId) {
+    public Plan(int id, String name, String description, Timestamp created, int adminId) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.created = created;
