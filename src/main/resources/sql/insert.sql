@@ -1,3 +1,6 @@
+
+use scrumlab;
+
 INSERT INTO `day_name` (`id`, `name`, `display_order`) VALUES
 (1, 'poniedziałek', 1),
 (2, 'wtorek', 2),
