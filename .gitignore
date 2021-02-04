@@ -17,4 +17,3 @@ _site/
 .idea/
 .eclipse
 *.sql
-*.xml
