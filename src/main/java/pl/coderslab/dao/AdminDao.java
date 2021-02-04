@@ -26,21 +26,33 @@ public class AdminDao {
 
     public Admin create(Admin admin) {
         try(Connection connection = DbUtil.getConnection();
-            PreparedStatement createstatement = connection.prepareStatement(CREATE_ADMINS_QUERY,PreparedStatement.RETURN_GENERATED_KEYS)){
-            { createstatement.setString(1,admin.getFirstName());
-            createstatement.setString(2,admin.getLastName());
-            createstatement.setString(3,admin.getEmail());
-            createstatement.setString(4,admin.getPassword());
-            createstatement.setInt(5,admin.getSuperAdmin());
-            createstatement.setInt(6,admin.getEnable());
+            PreparedStatement createdstatement = connection.prepareStatement(CREATE_ADMINS_QUERY,PreparedStatement.RETURN_GENERATED_KEYS)){
+            { createdstatement.setString(1,admin.getFirstName());
+            createdstatement.setString(2,admin.getLastName());
+            createdstatement.setString(3,admin.getEmail());
+            createdstatement.setString(4,admin.getPassword());
+            createdstatement.setInt(5,admin.getSuperAdmin());
+            createdstatement.setInt(6,admin.getEnable());
+                int result =createdstatement.executeUpdate();
+                if(result!=1){
+                    throw  new RuntimeException("Execute update returned"+result);
 
+                }
+                try(ResultSet generatedKeys=createdstatement.getGeneratedKeys()){
+                    if(generatedKeys.first()){
+                        admin.setId(generatedKeys.getInt(1));
+                        return admin;
+                    } else{
+                        throw  new RuntimeException("Generated key was not foung");
+                    }
+                }
             }
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        Admin admin1 = admin;
-        return admin1;
+        return  null;
+
+
     }
     public void updateAdmins(Admin admin) {
         try (Connection connection = DbUtil.getConnection();
