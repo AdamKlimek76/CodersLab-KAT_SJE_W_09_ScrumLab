@@ -28,19 +28,19 @@
         </a>
         <ul class="nav nounderline text-uppercase">
             <li class="nav-item ml-4">
-                <a class="nav-link color-header" href="login.html">logowanie</a>
+                <a class="nav-link color-header" href="login.jsp">logowanie</a>
             </li>
             <li class="nav-item ml-4">
-                <a class="nav-link color-header" href="registration.html">rejestracja</a>
+                <a class="nav-link color-header" href="registration.jsp">rejestracja</a>
             </li>
             <li class="nav-item ml-4">
-                <a class="nav-link" href="#about">o aplikacji</a>
+                <a class="nav-link" href="about.jsp">o aplikacji</a>
             </li>
             <li class="nav-item ml-4">
-                <a class="nav-link disabled" href="recipes.html">Przepisy</a>
+                <a class="nav-link disabled" href="recipes.jsp">Przepisy</a>
             </li>
             <li class="nav-item ml-4">
-                <a class="nav-link disabled" href="#contact">Kontakt</a>
+                <a class="nav-link disabled" href="contact.jsp">Kontakt</a>
             </li>
         </ul>
     </nav>
