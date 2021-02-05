@@ -1,6 +1,7 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.exception.NotFoundException;
+import pl.coderslab.model.LastPlan;
 import pl.coderslab.model.Plan;
 import pl.coderslab.utils.DbUtil;
 
@@ -162,6 +163,18 @@ public class PlanDao {
             e.printStackTrace();
         }
 
+    }
+
+    public List<LastPlan>readLastPlan(int adminId){
+        List<LastPlan>lastPlans=new ArrayList<>();
+        lastPlans.add(new LastPlan(1, "Plan Adama", "poniedziałek", "śniadanie", "Bułka", "opis" ));
+        lastPlans.add(new LastPlan(1, "Plan Adama", "poniedziałek", "obiad", "Żurek", "opis" ));
+        lastPlans.add(new LastPlan(1, "Plan Adama", "poniedziałek", "lunch", "Pizza", "opis" ));
+        lastPlans.add(new LastPlan(1, "Plan Adama", "wtorek", "śniadanie", "Chleb z kiełbasą", "opis" ));
+        lastPlans.add(new LastPlan(1, "Plan Adama", "wtorek", "kawa", "sernik", "opis" ));
+        lastPlans.add(new LastPlan(1, "Plan Adama", "wtorek", "kolacja", "na kolację piwko", "opis" ));
+
+        return lastPlans;
     }
 }
 

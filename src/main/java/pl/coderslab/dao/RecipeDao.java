@@ -19,9 +19,10 @@ public class RecipeDao {
     private static final String FIND_ALL_RECIPES_QUERY = "SELECT * FROM recipe;";
     private static final String READ_RECIPE_QUERY = "SELECT * from recipe where id = ?;";
     private static final String UPDATE_RECIPE_QUERY = "UPDATE	recipe SET name = ? , ingredients = ?, description = ?, created = ?, updated = ?, preparation_time = ?, preparation = ? WHERE	id = ?;";
+    private static final String READ_SIZE_RECIPE_QUERY = "SELECT COUNT(*) AS size FROM recipe WHERE admin_id=?;";
+
 
     public Recipe read(Integer recipeId) {
-        Book book = new Book();
         Recipe recipe = new Recipe();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(READ_RECIPE_QUERY)
@@ -141,6 +142,25 @@ public class RecipeDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+
+    public Integer readSize(Integer adminId) {
+        Integer recipeSize = 0;
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_SIZE_RECIPE_QUERY)
+        ) {
+            statement.setInt(1, adminId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    recipeSize = resultSet.getInt("size");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return recipeSize;
 
     }
 
