@@ -136,7 +136,7 @@
                                     <td class="col-8">${lastPlanDetail.recipeName}</td>
                                     <td class="col-2">
                                         <button type="button" class="btn btn-primary rounded-0">Szczegóły</button>
-                                    </td>
+                                    </td>cd
                                 </tr>
                             </c:if>
 
