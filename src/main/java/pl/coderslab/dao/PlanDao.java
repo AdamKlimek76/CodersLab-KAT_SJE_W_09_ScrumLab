@@ -173,6 +173,8 @@ public class PlanDao {
 
     }
 
+  
+
     public List<LastPlan> readLastPlan (int adminId) {
         List<LastPlan> planList = new ArrayList<>();
         LastPlan lastPlan = new LastPlan();
@@ -212,6 +214,7 @@ public class PlanDao {
             e.printStackTrace();
         }
         return counter;
+
 
     }
 }
