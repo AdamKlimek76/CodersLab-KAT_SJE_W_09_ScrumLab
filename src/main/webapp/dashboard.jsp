@@ -108,7 +108,7 @@
                     </div>
                     <div class="alert-item alert-light">
                         <i class="far icon-calendar fa-calendar-alt"></i>
-                        <span class="font-weight-bold">Liczba planów: 1</span>
+                        <span class="font-weight-bold">Liczba planów: ${numberOfPlans}</span>
                     </div>
                 </div>
             </div>
