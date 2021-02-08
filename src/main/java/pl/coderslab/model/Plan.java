@@ -19,6 +19,11 @@ public class Plan {
         this.adminId = adminId;
     }
 
+    public Plan(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public Plan() {
     }
 
@@ -61,6 +66,7 @@ public class Plan {
     public void setAdminId(int adminId) {
         this.adminId = adminId;
     }
+
 
     @Override
     public String toString() {
