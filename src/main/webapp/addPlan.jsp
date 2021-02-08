@@ -18,7 +18,7 @@
 <body>
 <header class="page-header">
     <nav class="navbar navbar-expand-lg justify-content-between">
-        <a href="/" class="navbar-brand main-logo main-logo-smaller">
+        <a href="/home.jsp" class="navbar-brand main-logo main-logo-smaller">
             Zaplanuj <span>Jedzonko</span>
         </a>
         <div class="d-flex justify-content-around">
@@ -32,37 +32,37 @@
     <div class="row dashboard-nowrap">
         <ul class="nav flex-column long-bg">
             <li class="nav-item">
-                <a class="nav-link" href="/dashboard.html">
+                <a class="nav-link" href="/dashboard.jsp">
                     <span>Pulpit</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/app-recipes.html">
+                <a class="nav-link" href="/app-recipes.jsp">
                     <span>Przepisy</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/app-schedules.html">
+                <a class="nav-link" href="/app-schedules.jsp">
                     <span>Plany</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/app-edit-user-data.html">
+                <a class="nav-link" href="/app-edit-user-data.jsp">
                     <span>Edytuj dane</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="/app-edit-password.html">
+                <a class="nav-link disabled" href="/app-edit-password.jsp">
                     <span>Zmień hasło</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/super-admin-users.html">
+                <a class="nav-link" href="/super-admin-users.jsp">
                     <span>Użytkownicy</span>
                     <i class="fas fa-angle-right"></i>
                 </a>

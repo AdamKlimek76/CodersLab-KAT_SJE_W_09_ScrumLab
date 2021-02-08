@@ -19,11 +19,6 @@ public class Plan {
         this.adminId = adminId;
     }
 
-    public Plan(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-
     public Plan() {
     }
 
