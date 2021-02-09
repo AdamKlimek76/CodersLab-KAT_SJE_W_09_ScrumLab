@@ -1,6 +1,7 @@
 package pl.coderslab.web;
 
 import pl.coderslab.dao.PlanDao;
+import pl.coderslab.model.Admin;
 import pl.coderslab.model.Plan;
 
 import javax.servlet.*;
@@ -26,7 +27,9 @@ public class addPlan extends HttpServlet {
         PlanDao planDao = new PlanDao();
 
         HttpSession session = request.getSession();
-        int adminId = (int) session.getAttribute("admin");
+        Admin admin = (Admin) session.getAttribute("admin");
+        int adminId = admin.getId();
+
         LocalDateTime dateTime = LocalDateTime.now();
         Timestamp timestamp = Timestamp.valueOf(dateTime);
 

@@ -45,7 +45,7 @@ public class Login extends HttpServlet {
                     }
 
                     setSessionAttributes(request, admin, numberOfRecipes, numberOfPlans, lastPlanDetails, lastPlanName, days);
-                } catch (NullPointerException e) {
+                } catch (Exception e) {
                     Integer numberOfRecipes = 0;
                     Integer numberOfPlans = 0;
                     List<LastPlan> lastPlanDetails = Arrays
