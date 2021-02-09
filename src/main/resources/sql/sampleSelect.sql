@@ -35,4 +35,5 @@ select * from recipe_plan;
 update plan set admin_id=2 where id=20;
 use scrumlab;
 select * from plan where admin_id=2;
+select *from recipe where admin_id=2;
 
