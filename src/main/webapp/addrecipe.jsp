@@ -18,7 +18,7 @@
           crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Charmonman:400,700|Open+Sans:400,600,700&amp;subset=latin-ext"
           rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
@@ -106,12 +106,11 @@
                             <tr class="d-flex">
                                 <th scope="row" class="col-2">Przygotowanie (minuty)</th>
                                 <td class="col-3">
-                                    <input  name="preparationTime" class="minutes" type="number" value="">
+                                    <input  name="preparationTime" class="minutes" type="number" value="0">
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-
                         <div class="row d-flex">
                             <div class="col-5 border-bottom border-3"><h3 class="text-uppercase">Sposób
                                 przygotowania</h3></div>
@@ -125,9 +124,10 @@
                             <div class="col-2"></div>
 
                             <div class="col-5 p-4">
-                                <textarea name="ingedients" class="w-100 skladniki p-1" rows="10"></textarea>
+                                <textarea name="ingredients" class="w-100 skladniki p-1" rows="10"></textarea>
                             </div>
                         </div>
+
                     </div>
                 </form>
             </div>
