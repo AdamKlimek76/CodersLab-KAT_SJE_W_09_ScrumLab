@@ -10,25 +10,23 @@ import java.io.IOException;
 @WebFilter("/app/*")
 public class Filter implements javax.servlet.Filter {
 
-   private  String charsetEncoding="utf-8";
+    private String charsetEncoding = "utf-8";
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
-        HttpServletRequest request1= (HttpServletRequest) request;
-        HttpServletResponse response1=(HttpServletResponse) response;
-        HttpSession session= request1.getSession();
-        if(session.getAttribute("admin")==null){
-            ((HttpServletResponse) response).sendRedirect(request1.getContextPath()+"/login");
+        HttpServletRequest request1 = (HttpServletRequest) request;
+        HttpServletResponse response1 = (HttpServletResponse) response;
+        HttpSession session = request1.getSession();
+
+        if (session.getAttribute("admin") == null) {
+            ((HttpServletResponse) response).sendRedirect(request1.getContextPath() + "/login");
+        } else {
+                chain.doFilter(request, response);
         }
-        else {
-            request.setCharacterEncoding(charsetEncoding);
-            String contentType = "text/html";
-            response.setContentType(contentType);
-            response.setCharacterEncoding(charsetEncoding);
-            chain.doFilter(request, response);
-        }
+
 
 
     }
+
     public void destroy() {
     }
 

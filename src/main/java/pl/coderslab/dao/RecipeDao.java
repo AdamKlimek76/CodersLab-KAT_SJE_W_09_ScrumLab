@@ -20,7 +20,7 @@ public class RecipeDao {
     private static final String READ_RECIPE_QUERY = "SELECT * from recipe where id = ?;";
     private static final String UPDATE_RECIPE_QUERY = "UPDATE	recipe SET name = ? , ingredients = ?, description = ?, created = ?, updated = ?, preparation_time = ?, preparation = ? WHERE	id = ?;";
     private static final String READ_SIZE_RECIPE_QUERY = "SELECT COUNT(*) AS size FROM recipe WHERE admin_id=?;";
-
+    private static final String READ_RECIPE_BY_ADMIN_ID_QUERY = "SELECT * from recipe where admin_id = ?;";
 
     public Recipe read(Integer recipeId) {
         Recipe recipe = new Recipe();
@@ -163,5 +163,36 @@ public class RecipeDao {
         return recipeSize;
 
     }
+
+
+    public List<Recipe> readRecipeByAdminId(Integer adminId) {
+
+        List<Recipe> recipeList = new ArrayList<>();
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_RECIPE_BY_ADMIN_ID_QUERY)
+        ) {
+            statement.setInt(1, adminId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Recipe recipe = new Recipe();
+                    recipe.setId(resultSet.getInt("id"));
+                    recipe.setName(resultSet.getString("name"));
+                    recipe.setIngredients(resultSet.getString("ingredients"));
+                    recipe.setDescription(resultSet.getString("description"));
+                    recipe.setCreated(resultSet.getTimestamp("created"));
+                    recipe.setUpdated(resultSet.getTimestamp("updated"));
+                    recipe.setPreparationTime(resultSet.getInt("preparation_time"));
+                    recipe.setPreparation(resultSet.getString("preparation"));
+                    recipe.setAdminId(resultSet.getInt("admin_id"));
+                    recipeList.add(recipe);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return recipeList;
+
+    }
+
 
 }

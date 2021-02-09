@@ -1,22 +1,27 @@
 package pl.coderslab.web;
 
 import pl.coderslab.dao.AdminDao;
+
 import pl.coderslab.dao.PlanDao;
 import pl.coderslab.dao.RecipeDao;
 import pl.coderslab.model.Admin;
 import pl.coderslab.model.LastPlan;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
+
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
@@ -25,6 +30,22 @@ public class Login extends HttpServlet {
         try {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+
+            AdminDao adminDao = new AdminDao();
+            Admin admin = adminDao.findAdminByEmail(email);
+            if (admin == null) {
+                System.out.println("null");
+                response.sendRedirect("/login");
+            } else if (!admin.getPassword().equals(password)) {
+                System.out.println("hasło niezgodne");
+                response.sendRedirect("/login");
+            } else {
+                System.out.println("ok");
+                getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+            }
+        } catch (NullPointerException e) {
+            System.out.println("nie wprowadzono hasło bądz loginu");
+
             Admin admin = getAdmin(email);
             if (admin == null) {
                 response.sendRedirect("/login");
@@ -45,7 +66,9 @@ public class Login extends HttpServlet {
                     }
 
                     setSessionAttributes(request, admin, numberOfRecipes, numberOfPlans, lastPlanDetails, lastPlanName, days);
+
                 } catch (Exception e) {
+
                     Integer numberOfRecipes = 0;
                     Integer numberOfPlans = 0;
                     List<LastPlan> lastPlanDetails = Arrays
@@ -61,10 +84,13 @@ public class Login extends HttpServlet {
             }
         } catch (NullPointerException e) {
             System.out.println("null pointer exeption");
+
             response.sendRedirect("/login");
 
         }
     }
+
+
 
     private void setSessionAttributes(HttpServletRequest request, Admin admin, Integer numberOfRecipes, Integer numberOfPlans, List<LastPlan> lastPlanDetails, String lastPlanName, Set<String> days) {
         HttpSession session = request.getSession();
@@ -91,10 +117,13 @@ public class Login extends HttpServlet {
         return planDao.numAddedPlans(admin.getId());
     }
 
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
         getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
     }
+
+=======
 
     private Admin getAdmin(String email) {
         AdminDao adminDao = new AdminDao();

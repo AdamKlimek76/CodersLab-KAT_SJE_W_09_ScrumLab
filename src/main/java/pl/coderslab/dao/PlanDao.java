@@ -30,6 +30,7 @@ public class PlanDao {
             "ORDER by day_name.display_order, recipe_plan.display_order;";
 
     private static final String ALL_ADMIN_PLANS =  "SELECT * FROM plan WHERE admin_id = ? ;";
+    private static final String READ_PLANS_BY_ADMIN_ID_QUERY = "SELECT * from plan where admin_id = ?;";
 
 
     /**
@@ -38,7 +39,7 @@ public class PlanDao {
      * @param planId
      * @return
      */
-    public Plan read(Integer planId) {
+    public Plan read (Integer planId) {
         Plan plan = new Plan();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(READ_PLAN_QUERY)
@@ -215,8 +216,31 @@ public class PlanDao {
             e.printStackTrace();
         }
         return counter;
+    }
 
+    public List<Plan> readPlansByAdminId (Integer adminId) {
+        List<Plan>planList=new ArrayList<>();
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_PLANS_BY_ADMIN_ID_QUERY)
+        ) {
+            statement.setInt(1, adminId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Plan plan = new Plan();
+                    plan.setId(resultSet.getInt("id"));
+                    plan.setName(resultSet.getString("name"));
+                    plan.setDescription(resultSet.getString("description"));
+                    plan.setCreated(resultSet.getTimestamp("created"));
+                    plan.setAdminId(resultSet.getInt("admin_id"));
+                    planList.add(plan);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return planList;
 
     }
+
 }
 
