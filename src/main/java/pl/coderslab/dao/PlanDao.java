@@ -1,6 +1,8 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.exception.NotFoundException;
+import pl.coderslab.model.Admin;
+import pl.coderslab.model.LastPlan;
 import pl.coderslab.model.Plan;
 import pl.coderslab.utils.DbUtil;
 
@@ -19,6 +21,15 @@ public class PlanDao {
     private static final String READ_PLAN_QUERY = "SELECT * from plan where id = ?;";
     private static final String UPDATE_PLAN_QUERY =
             "UPDATE	plan SET name = ?, description = ? , created = ?, admin_id = ? WHERE id = ?;";
+    private static final String READ_LAST_PLAN_QUERY = "SELECT recipe_plan.id as id, plan.name as name_plan, day_name.name as day_name, meal_name,  recipe.name as recipe_name, recipe.description as recipe_description\n" +
+            "FROM recipe_plan\n" +
+            "JOIN day_name on day_name.id=day_name_id\n" +
+            "JOIN recipe on recipe.id=recipe_id\n" +
+            "JOIN plan on recipe_plan.plan_id = plan.id\n" +
+            "WHERE recipe_plan.plan_id = (SELECT MAX(plan.id) from plan WHERE admin_id = ?)\n" +
+            "ORDER by day_name.display_order, recipe_plan.display_order;";
+
+    private static final String ALL_ADMIN_PLANS =  "SELECT * FROM plan WHERE admin_id = ? ;";
 
 
     /**
@@ -76,12 +87,7 @@ public class PlanDao {
         return planList;
     }
 
-    /**
-     * Create plan
-     *
-     * @param plan
-     * @return
-     */
+
     public Plan create(Plan plan) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement insertStm = connection.prepareStatement(CREATE_PLAN_QUERY,
@@ -161,6 +167,55 @@ public class PlanDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+  
+
+    public List<LastPlan> readLastPlan (int adminId) {
+        List<LastPlan> planList = new ArrayList<>();
+
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_LAST_PLAN_QUERY)
+        ) {
+            statement.setInt(1, adminId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    LastPlan lastPlan = new LastPlan();
+                    lastPlan.setId(resultSet.getInt("id"));
+                    lastPlan.setPlanName(resultSet.getString("name_plan"));
+                    lastPlan.setDayName(resultSet.getString("day_name"));
+                    lastPlan.setMealName(resultSet.getString("meal_name"));
+                    lastPlan.setRecipeName(resultSet.getString("recipe_name"));
+                    lastPlan.setRecipeDescription(resultSet.getString("recipe_description"));
+                    planList.add(lastPlan);
+                }
+            }
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+        return planList;
+    }
+
+
+
+    public int numAddedPlans (int adminId) {
+        int counter = 0;
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(ALL_ADMIN_PLANS)
+        ) {
+            statement.setInt(1, adminId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    counter++;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return counter;
+
 
     }
 }
