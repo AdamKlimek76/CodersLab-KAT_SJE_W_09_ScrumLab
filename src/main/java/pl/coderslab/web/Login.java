@@ -31,21 +31,6 @@ public class Login extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
 
-            AdminDao adminDao = new AdminDao();
-            Admin admin = adminDao.findAdminByEmail(email);
-            if (admin == null) {
-                System.out.println("null");
-                response.sendRedirect("/login");
-            } else if (!admin.getPassword().equals(password)) {
-                System.out.println("hasło niezgodne");
-                response.sendRedirect("/login");
-            } else {
-                System.out.println("ok");
-                getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
-            }
-        } catch (NullPointerException e) {
-            System.out.println("nie wprowadzono hasło bądz loginu");
-
             Admin admin = getAdmin(email);
             if (admin == null) {
                 response.sendRedirect("/login");
@@ -64,9 +49,8 @@ public class Login extends HttpServlet {
                     for (int i = 0; i < lastPlanDetails.size(); i++) {
                         days.add(lastPlanDetails.get(i).getDayName());
                     }
-
                     setSessionAttributes(request, admin, numberOfRecipes, numberOfPlans, lastPlanDetails, lastPlanName, days);
-                } catch (NullPointerExeption e) {
+                } catch (Exception e) {
                     Integer numberOfRecipes = 0;
                     Integer numberOfPlans = 0;
                     List<LastPlan> lastPlanDetails = Arrays
@@ -81,13 +65,11 @@ public class Login extends HttpServlet {
                 getServletContext().getRequestDispatcher("/dashboard.jsp").forward(request, response);
             }
         } catch (NullPointerException e) {
-            System.out.println("null pointer exeption");
+            System.out.println("nie wprowadzono hasło bądz loginu");
 
-            response.sendRedirect("/login");
-
+            getServletContext().getRequestDispatcher("/dashboard.jsp").forward(request, response);
         }
     }
-
 
 
     private void setSessionAttributes(HttpServletRequest request, Admin admin, Integer numberOfRecipes, Integer numberOfPlans, List<LastPlan> lastPlanDetails, String lastPlanName, Set<String> days) {
@@ -121,7 +103,6 @@ public class Login extends HttpServlet {
         getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
-=======
 
     private Admin getAdmin(String email) {
         AdminDao adminDao = new AdminDao();
