@@ -62,6 +62,7 @@ public class Plan {
         this.adminId = adminId;
     }
 
+
     @Override
     public String toString() {
         return "Plan{" +

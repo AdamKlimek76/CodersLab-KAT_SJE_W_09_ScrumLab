@@ -50,7 +50,9 @@ public class Login extends HttpServlet {
                         days.add(lastPlanDetails.get(i).getDayName());
                     }
                     setSessionAttributes(request, admin, numberOfRecipes, numberOfPlans, lastPlanDetails, lastPlanName, days);
+
                 } catch (Exception e) {
+
                     Integer numberOfRecipes = 0;
                     Integer numberOfPlans = 0;
                     List<LastPlan> lastPlanDetails = Arrays
