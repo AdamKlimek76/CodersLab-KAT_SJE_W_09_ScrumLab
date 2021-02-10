@@ -18,7 +18,7 @@
           crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Charmonman:400,700|Open+Sans:400,600,700&amp;subset=latin-ext"
           rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
@@ -38,44 +38,7 @@
 
 <section class="dashboard-section">
     <div class="row dashboard-nowrap">
-        <ul class="nav flex-column long-bg">
-            <li class="nav-item">
-                <a class="nav-link" href="/dashboard.html">
-                    <span>Pulpit</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/app-recipes.html">
-                    <span>Przepisy</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/app-schedules.html">
-                    <span>Plany</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/app-edit-user-data.html">
-                    <span>Edytuj dane</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="/app-edit-password.html">
-                    <span>Zmień hasło</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/super-admin-users.html">
-                    <span>Użytkownicy</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-        </ul>
+        <%@include file="menuBoczne.jsp" %>
 
         <div class="m-4 p-3 width-medium text-color-darker">
             <div class="dashboard-content border-dashed p-3 m-4 view-height">
@@ -96,7 +59,7 @@
                                 <th scope="row" class="col-2">Nazwa Przepisu</th>
                                 <td class="col-7">
 
-                                    <input name="name" class="w-100 p-1" value="">
+                                    <input name="recipeName" class="w-100 p-1" value="">
                                 </td>
                             </tr>
                             <tr class="d-flex">
@@ -125,7 +88,7 @@
                             <div class="col-2"></div>
 
                             <div class="col-5 p-4">
-                                <textarea name="ingedients" class="w-100 skladniki p-1" rows="10"></textarea>
+                                <textarea name="ingredients" class="w-100 skladniki p-1" rows="10"></textarea>
                             </div>
                         </div>
                     </div>
