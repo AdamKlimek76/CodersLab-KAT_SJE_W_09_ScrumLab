@@ -21,6 +21,7 @@ public class AddRecipe extends HttpServlet {
         Admin admin = (Admin) session.getAttribute("admin");
 
         try {
+
             int adminId = admin.getId();
             String recipeName = request.getParameter("recipeName");
             if (recipeName == null) {
@@ -45,10 +46,12 @@ public class AddRecipe extends HttpServlet {
             recipeDao.create(recipe);
             response.sendRedirect("/app/recipe/list");
         } catch (NullPointerException e) {
+
             System.out.println("nie wprowadzono danych");
             System.out.println(admin);
             response.sendRedirect("/app/recipe/add");
             e.printStackTrace();
+
         }
 
     }

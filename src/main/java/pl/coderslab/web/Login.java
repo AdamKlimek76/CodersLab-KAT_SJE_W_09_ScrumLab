@@ -67,9 +67,8 @@ public class Login extends HttpServlet {
                 getServletContext().getRequestDispatcher("/dashboard.jsp").forward(request, response);
             }
         } catch (NullPointerException e) {
-            System.out.println("nie wprowadzono hasło bądz loginu");
 
-            getServletContext().getRequestDispatcher("/dashboard.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
 

@@ -74,11 +74,10 @@
                             <tbody>
 
                             <c:if test="${lastPlanDetail.dayName==day}">
-                                <tr class="d-flex" name="${lastPlanDetail.id}">
+                                <tr class="d-flex">
                                     <td class="col-2">${lastPlanDetail.mealName}</td>
                                     <td class="col-8">${lastPlanDetail.recipeName}</td>
-                                    <td class="col-2">
-                                        <button type="button" class="btn btn-primary rounded-0">Szczegóły</button>
+                                    <td class="col-2"><a href="/app/recipe/details?id=${lastPlanDetail.id}" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
                                     </td>
                                 </tr>
                             </c:if>
