@@ -17,37 +17,41 @@ import java.time.LocalDateTime;
 @WebServlet("/app/recipe/add")
 public class AddRecipe extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Admin admin = (Admin) session.getAttribute("admin");
+
         try {
-            HttpSession session = request.getSession();
-            Admin admin = (Admin) session.getAttribute("admin");
-            System.out.println(admin);
+
             int adminId = admin.getId();
-            System.out.println(adminId);
-            String name = request.getParameter("name");
-            System.out.println(name);
+            String recipeName = request.getParameter("recipeName");
+            if (recipeName == null) {
+                throw new NullPointerException();
+            }
+            int preparationTime = 0;
             String description = request.getParameter("description");
-            System.out.println(description);
-            Integer preparationTime = Integer.parseInt(request.getParameter("preparationTime"));
-            System.out.println(preparationTime);
+            try {
+                 preparationTime = Integer.parseInt(request.getParameter("preparationTime"));
+            } catch (NumberFormatException e) {
+                 preparationTime = 0;
+            }
+
             String preparation = request.getParameter("preparation");
-            System.out.println(preparation);
             String ingredients = request.getParameter("ingredients");
-            System.out.println(ingredients);
-            LocalDateTime localDateTime=LocalDateTime.now();
 
+            LocalDateTime localDateTime = LocalDateTime.now();
             Timestamp created = Timestamp.valueOf(localDateTime);
-            System.out.println(created);
-            Timestamp updated = Timestamp.valueOf(localDateTime);
-            System.out.println(updated);
 
-            Recipe recipe = new Recipe(1, name, ingredients, description, created, updated, preparationTime, preparation, adminId);
-            System.out.println(recipe);
+            Recipe recipe = new Recipe(1, recipeName, ingredients, description, created, created, preparationTime, preparation, adminId);
             RecipeDao recipeDao = new RecipeDao();
             recipeDao.create(recipe);
             response.sendRedirect("/app/recipe/list");
         } catch (NullPointerException e) {
-            //System.out.println("nie wprowadzono danych");
+
+            System.out.println("nie wprowadzono danych");
+            System.out.println(admin);
             response.sendRedirect("/app/recipe/add");
+            e.printStackTrace();
+
         }
 
     }
@@ -56,9 +60,8 @@ public class AddRecipe extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("admin") == null) {
             getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
-        } else
+        } else {
             getServletContext().getRequestDispatcher("/addrecipe.jsp").forward(request, response);
-
-
+        }
     }
 }

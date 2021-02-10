@@ -36,6 +36,6 @@ public class addPlan extends HttpServlet {
         Plan plan = new Plan(1, planName, textPlan, timestamp, adminId);
         planDao.create(plan);
 
-        getServletContext().getRequestDispatcher("/app/plan/list").forward(request, response);
+        response.sendRedirect("/app/plan/list");
     }
 }
