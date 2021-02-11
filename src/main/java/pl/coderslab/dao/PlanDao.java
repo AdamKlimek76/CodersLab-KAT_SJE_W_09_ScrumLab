@@ -1,5 +1,6 @@
 package pl.coderslab.dao;
 
+import pl.coderslab.dao.PlanDao;
 import pl.coderslab.exception.NotFoundException;
 import pl.coderslab.model.Admin;
 import pl.coderslab.model.LastPlan;
@@ -7,14 +8,20 @@ import pl.coderslab.model.Plan;
 import pl.coderslab.model.PlanDetails;
 import pl.coderslab.utils.DbUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlanDao {
+
     //ZAPYTANIA SQL
     private static final String CREATE_PLAN_QUERY = "INSERT INTO plan(name,description,created,admin_id) VALUES (?,?,?,?);";
     private static final String DELETE_PLAN_QUERY = "DELETE FROM plan where id = ?;";
@@ -281,5 +288,6 @@ public class PlanDao {
 
     }
 
-}
 
+
+}
