@@ -73,7 +73,7 @@
                                         <td class="col-2">${planDetails.mealName}</td>
                                         <td class="col-7">${planDetails.recipeName}</td>
                                         <td class="col-1 center">
-                                            <a href="#" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
+                                            <a href="/app/plan/recipe/delete?recipeId=${planDetails.recipeId}" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
                                         </td>
                                         <td class="col-2 center">
                                             <a href="/app/plan/details" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
